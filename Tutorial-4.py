@@ -6,6 +6,8 @@ from keras.callbacks import TensorBoard
 import time
 import pickle
 
+gpu_options = tf.GPUOptions(per_process_gpu_memory_fraction=0.333)
+sess = tf.Session(config=tf.ConfigProto(gpu_options=gpu_options))
 
 dense_layers = [0,1,2]
 layer_sizes = [32, 64, 128]
