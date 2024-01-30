@@ -6,8 +6,22 @@ from keras.callbacks import TensorBoard
 import time
 import pickle
 
-gpu_options = tf.GPUOptions(per_process_gpu_memory_fraction=0.333)
-sess = tf.Session(config=tf.ConfigProto(gpu_options=gpu_options))
+import tensorflow as tf
+
+# You can set the memory growth option which attempts to allocate only as much
+# GPU memory as needed at a given time, and continues to allocate more when needed.
+gpus = tf.config.experimental.list_physical_devices('GPU')
+if gpus:
+    try:
+        # Currently, memory growth needs to be the same across GPUs
+        for gpu in gpus:
+            tf.config.experimental.set_memory_growth(gpu, True)
+        logical_gpus = tf.config.experimental.list_logical_devices('GPU')
+        print(len(gpus), "Physical GPUs,", len(logical_gpus), "Logical GPUs")
+    except RuntimeError as e:
+        # Memory growth must be set before GPUs have been initialized
+        print(e)
+
 
 dense_layers = [0,1,2]
 layer_sizes = [32, 64, 128]
