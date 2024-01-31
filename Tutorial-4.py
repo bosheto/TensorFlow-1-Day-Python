@@ -22,10 +22,13 @@ if gpus:
         # Memory growth must be set before GPUs have been initialized
         print(e)
 
+# Parameters
 
-dense_layers = [0,1,2]
-layer_sizes = [32, 64, 128]
-conv_layers = [1,2,3]
+dense_layers = [0]
+layer_sizes = [64, 128]
+conv_layers = [3]
+
+kernel_size = [2 ,3, 4]
 
 X = pickle.load(open('models/T2/X.pickle', 'rb'))
 Y = pickle.load(open('models/T2/y.pickle', 'rb'))
